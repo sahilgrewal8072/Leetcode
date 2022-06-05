@@ -18,12 +18,21 @@ public:
             if(nums[0] == nums[1])return 1;
             return 2;
         }
-        vector<vector<int>> dp(n, vector<int>(2, -1));
-        int mx = 0;
-        for(int i=0; i<=1; i++){
-            mx = max(mx, solve(1, i, nums, dp, n));
-            // cout<<mx<<endl;
+        vector<vector<int>> dp(n+1, vector<int>(2, 0));
+        // int mx = 0;
+        // for(int i=0; i<=1; i++){
+        //     mx = max(mx, solve(1, i, nums, dp, n));
+        // }
+        // return mx + 1;
+        for(int ind = n-1; ind>0; ind--){
+            for(int state = 0; state <= 1; state++){
+                int take = 0;
+                if(nums[ind] - nums[ind-1] < 0 && state == 1 || nums[ind] - nums[ind-1] > 0 && state == 0){
+                    dp[ind][state] =  1 + dp[ind + 1][!state];
+                }else
+                dp[ind][state] = 0 + dp[ind + 1][state];
+            }
         }
-        return mx + 1;
+        return 1 + max(dp[1][1], dp[1][0]);
     }
 };
