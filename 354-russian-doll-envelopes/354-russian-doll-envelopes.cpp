@@ -5,8 +5,7 @@ public:
     int maxEnvelopes(vector<vector<int>>& arr) {
          int n = arr.size();
         if(n == 0)return 0;
-       vector<int> dp;
-        
+       vector<int> dp;  
         sort(arr.begin(), arr.end(), [](vector<int> &a, vector<int> &b){
              return ((a[0] < b[0]) || (a[0] == b[0] && a[1] > b[1]));
         });
