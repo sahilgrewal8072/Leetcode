@@ -17,7 +17,7 @@ public:
         int n = nums.size();
         nums.insert(nums.begin(), 1);
         nums.push_back(1);
-        vector<vector<int>> dp(n+2, vector<int>(n+2, -1));
+        vector<vector<int>> dp(n+1, vector<int>(n+1, -1));
         return solve(1, n, nums, dp);
     }
 };
