@@ -4,9 +4,12 @@ public:
     
 
     void dfs(int node, int parent, vector<int> adj[], vector<vector<int>> &dp){
+        if(dp[parent][node] != -1)return;
         for(auto it : adj[node]){
-                if(dp[parent][node] == -1)
-                dfs(it, parent, adj, dp);
+                if(dp[parent][node] == -1){
+                    dfs(it, parent, adj, dp);
+                }
+                
         }
         
         if(node != parent){
