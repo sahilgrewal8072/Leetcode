@@ -3,16 +3,16 @@ public:
     
     
 
-    void dfs(int node, int parent, vector<int> adj[], vector<vector<int>> &check){
+    void dfs(int node, int parent, vector<int> adj[], vector<vector<int>> &dp){
         for(auto it : adj[node]){
-                if(check[parent][node] == -1)
-                dfs(it, parent, adj, check);
+                if(dp[parent][node] == -1)
+                dfs(it, parent, adj, dp);
         }
         
         if(node != parent){
-            check[parent][node] = 1;
+            dp[parent][node] = 1;
         }else{
-            check[parent][node] = 0;
+            dp[parent][node] = 0;
         }
     }
     
@@ -27,14 +27,13 @@ public:
             v = it[1];
             adj[u].push_back(v);
         }
-        vector<vector<int>> check(nodes, vector<int>(nodes, -1));
+        vector<vector<int>> dp(nodes, vector<int>(nodes, -1));
         for(int i=0; i<nodes; i++){
-            dfs(i, i, adj, check);
+            dfs(i, i, adj, dp);
         }
-      
-        
+     
         for(int i=0; i<ans.size(); i++){
-            if(check[queries[i][0]][queries[i][1]] == 1){
+            if(dp[queries[i][0]][queries[i][1]] == 1){
                 ans[i] = true;
             }
         }
