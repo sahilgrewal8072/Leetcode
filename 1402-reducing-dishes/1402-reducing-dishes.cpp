@@ -14,15 +14,18 @@ public:
     int maxSatisfaction(vector<int>& arr) {
         int n = arr.size();
         sort(arr.begin(), arr.end());
-    vector<vector<int>> dp(n+1, vector<int>(n+2, 0));
+    // vector<vector<int>> dp(n+1, vector<int>(n+2, 0));
+        vector<int> nxt(n+2, 0), curr(n+2, 0);
         // return solve(0, 1, arr, dp, n);
+        
         for(int ind=n-1; ind>=0; ind--){
             for(int time = n ; time>=1; time--){
-                 int take =  arr[ind]*time + dp[ind + 1][time + 1];
-                int notake = dp[ind + 1][time];
-                dp[ind][time] = max(take, notake);
+                 int take =  arr[ind]*time + nxt[time + 1];
+                int notake = nxt[time];
+                curr[time] = max(take, notake);
             }
+            nxt = curr;
         }
-        return dp[0][1];
+        return nxt[1];
     }
 };
