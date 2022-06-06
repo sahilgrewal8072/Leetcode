@@ -13,7 +13,9 @@ public:
     
     int tallestBillboard(vector<int>& rods) {
         int n = rods.size();
-        vector<vector<int>> dp(n, vector<int> (5001, -1));
+        int sum = 0;
+        for(auto it : rods) sum += it;
+        vector<vector<int>> dp(n, vector<int> (sum+1, -1));
         return solve(0, 0, 0, rods, dp, n)/2;
     }
 };
