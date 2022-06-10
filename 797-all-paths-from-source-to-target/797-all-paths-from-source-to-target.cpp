@@ -1,7 +1,6 @@
 class Solution {
 public:
     
-    vector<int> visited;
     void dfs(int node, vector<int> adj[], vector<int> temp, vector<vector<int>> &ans, int n){
         temp.push_back(node);
         if(node == n)
@@ -16,26 +15,18 @@ public:
     }
     
     vector<vector<int>> allPathsSourceTarget(vector<vector<int>>& graph) {
+        // since this is a DAG there is no need of visited array
         int n = graph.size();
         int u, v;
-        visited.resize(n, 0);
         vector<int> adj[n];
         for(int i=0; i<n; i++){
             for(int j = 0; j<graph[i].size(); j++){
                 adj[i].push_back(graph[i][j]);
             }
         }
-        // for(int i=0; i<n; i++){
-        //     for(auto it : adj[i]){
-        //         cout<<i<<"->"<<it<<" ";
-        //     }
-        //     cout<<endl;
-        // }
         vector<vector<int>> ans;
         vector<int> temp;
-        // temp.push_back(0);
         dfs(0, adj, temp, ans, n-1);
-        // for(auto it : visited)cout<<it<<" ";
         return ans;
     }
 };
