@@ -15,12 +15,30 @@ public:
     
     bool wordBreak(string s, vector<string>& wordDict) {
         int n = s.length();
-        vector<int> dp(n, -1);
+        vector<int> dp(n+1, 0);
         unordered_set<string> st;
         for(auto it : wordDict){
             st.insert(it);
         }
         
-        return solve(0, s, st, n, dp);
+        dp[n] = 1;
+        for(int ind = n-1; ind >= 0; ind--){
+            string sub = "";
+            bool flag = false;
+            for(int i = ind; i < n; i++){
+                // cout<<s[i]<<endl;
+                if(st.count(sub += s[i]) > 0 && dp[i + 1] == 1){
+                    dp[ind] = 1;
+                    flag = true;
+                }
+            }
+            if(!flag)
+            dp[ind] = 0;
+        }
+        for(auto it : dp){
+            cout<<it<<" ";
+        }
+        return dp[0];
+        // return solve(0, s, st, n, dp);
     }
 };
