@@ -26,7 +26,6 @@ public:
             string sub = "";
             bool flag = false;
             for(int i = ind; i < n; i++){
-                // cout<<s[i]<<endl;
                 if(st.count(sub += s[i]) > 0 && dp[i + 1] == 1){
                     dp[ind] = 1;
                     flag = true;
@@ -35,9 +34,7 @@ public:
             if(!flag)
             dp[ind] = 0;
         }
-        for(auto it : dp){
-            cout<<it<<" ";
-        }
+        
         return dp[0];
         // return solve(0, s, st, n, dp);
     }
