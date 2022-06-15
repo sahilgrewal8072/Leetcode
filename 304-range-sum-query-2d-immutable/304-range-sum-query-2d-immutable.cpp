@@ -5,24 +5,12 @@ public:
         int n = matrix.size();
         int m = matrix[0].size();
           dp.resize(n, vector<int>(m));
-        for(int i=0; i<n; i++){
+            for(int i=0; i<n; i++){
              dp[i][0] = matrix[i][0];
             for(int j=1; j<m; j++){
                 dp[i][j] = dp[i][j-1] + matrix[i][j];
             }
         }
-        
-        // storing the prefix sum col wise
-        
-        // for(int i=0; i<m; i++){
-        //     vector<int> temp(n, 0);
-        //      temp[0] = matrix[0][i];
-        //     for(int j=1; j<n; j++){
-        //         temp[j] = temp[j-1] + matrix[j][i];
-        //     }
-        //     mp2[i] = temp;
-        // }
-        
     }
     
     int sumRegion(int row1, int col1, int row2, int col2) {
