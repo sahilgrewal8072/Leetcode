@@ -30,9 +30,19 @@ public:
             prev++;
             arr.push_back(nums[i]);
         }
-        vector<int> dp(prev+1, -1);
-        // cout<<prev<<endl;
-        // for(auto it : arr)cout<<it<<" ";
-        return solve(0, arr, prev+1, mp, dp);
+        n = prev + 1;
+        vector<int> dp(n+1, 0);
+        for(int ind=n-1; ind>=0; ind--){
+              int take = 0;
+            if(ind + 1 < n && arr[ind+1]  == arr[ind] + 1){
+                 take = mp[arr[ind]]*arr[ind] + dp[ind+2];
+            }else{
+                take = mp[arr[ind]]*arr[ind]  + dp[ind+1];
+            }
+            int notake = dp[ind + 1];
+            dp[ind]  = max(take, notake);
+        }
+        return dp[0];
+        // return solve(0, arr, prev+1, mp, dp);
    }
 };
