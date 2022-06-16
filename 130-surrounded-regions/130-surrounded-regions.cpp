@@ -1,44 +1,72 @@
 class Solution {
-public:
     
-    void dfs(int x, int y, vector<vector<char>> &board, int dx[], int dy[], int m, int n){
-        board[x][y] = '#';
-        for(int i=0; i<4; i++){
-            int nx = x + dx[i];
-            int ny = y + dy[i];
-            if(nx > 0 && ny > 0 && nx < m-1 && ny < n-1 && board[nx][ny] == 'O'){    
-                dfs(nx, ny, board, dx, dy, m, n);
+    private:
+        vector<int> parent, size;
+        public:
+       void DSU(int n){
+            parent.resize(n+1);
+            size.resize(n+1, 0);
+            for(int i=0; i<=n; i++){
+                parent[i] = i;
             }
         }
+        
+        
+        int find_parent(int node){
+            if(node == parent[node]){
+                return node;
+            }
+            return parent[node] = find_parent(parent[node]);
+        }
+    
+    bool isConnected(int u, int v){
+        return (find_parent(u) == find_parent(v));
     }
+    
+        void union_size(int u, int v){
+            u = find_parent(u);
+            v = find_parent(v);
+            if(u == v)return;
+            if(size[u] > size[v]){
+                parent[v]  = u;
+                size[u] += size[v];
+            }else{
+                parent[u] = v;
+                size[v] += size[u];
+            }
+        }
     
     void solve(vector<vector<char>>& board) {
         int m = board.size();
         int n = board[0].size();
         int dx[] = {1, -1, 0, 0};
         int dy[] = {0, 0, 1, -1};
-        for(int i=0; i<n; i++){
-            if(board[0][i] == 'O')
-            dfs(0, i, board, dx, dy, m, n);
-            if(board[m-1][i] == 'O')
-            dfs(m-1, i, board, dx, dy, m, n);
+        DSU(m*n);
+        // dummy will be present at pos m*n
+        for(int i=0; i<m; i++){
+            for(int j=0; j<n; j++){
+                if(i == 0 || j == 0 || i == m-1 || j == n-1){
+                    union_size(i*n + j, m*n);
+                }else if(board[i][j] == 'O'){
+                    for(int k=0; k<4; k++){
+                        int nx = i + dx[k];
+                        int ny = j + dy[k];
+                        if(board[nx][ny] == 'O'){
+                            union_size(i*n + j, nx*n + ny);
+                        }
+                    }
+                }
+                
+            }
         }
         
         for(int i=0; i<m; i++){
-            if(board[i][0] == 'O')
-                dfs(i, 0, board, dx, dy, m, n);
-            if(board[i][n-1] == 'O')
-                dfs(i, n-1, board, dx, dy, m, n);
-        }
-       
-        for(int i=0; i<m; i++){
             for(int j=0; j<n; j++){
-                if(board[i][j] == 'O'){
+                if(!isConnected(i*n + j, m*n)){
                     board[i][j] = 'X';
-                }else if(board[i][j] == '#'){
-                    board[i][j] = 'O';
                 }
             }
         }
+        
     }
 };
