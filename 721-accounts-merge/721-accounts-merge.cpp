@@ -1,3 +1,4 @@
+// Must revise hardcore question
 class DSU {
 public:
     vector<int> representative;
