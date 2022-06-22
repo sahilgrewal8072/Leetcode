@@ -12,9 +12,7 @@ public:
             return y;
         }    
         if(dp[x][y] != -2)return dp[x][y];
-        if(isValid(x, y, m, n)){
-            
-        }
+
         if(grid[x][y] == 1){
             if(isValid(x, y + 1, m, n) && grid[x][y+1] == 1){
                 return dp[x][y] = solve(x+1, y+1, grid, m, n, dp);
