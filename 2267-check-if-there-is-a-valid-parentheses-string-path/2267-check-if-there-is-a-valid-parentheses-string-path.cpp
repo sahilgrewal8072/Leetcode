@@ -7,9 +7,7 @@ public:
            
             return false;
         }
-        
-       
-        
+            
         if(grid[x][y] == '('){
             open++;
         }else{
