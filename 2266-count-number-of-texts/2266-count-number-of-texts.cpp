@@ -22,9 +22,28 @@ public:
         return dp[ind] = ans%M;
     }
     
-    int countTexts(string mobile) {
-        int n = mobile.length();
-        vector<int> dp(n+1, -1);
-        return solve(mobile, n, 0, dp);
+    int countTexts(string s) {
+        int n = s.length();
+        vector<int> dp(n+1, 0);
+        // return solve(mobile, n, 0, dp);
+        dp[n] = 1;
+        for(int ind = n-1; ind >= 0; ind--){
+             int ans = 0;
+        if(ind + 1 < n && s[ind] == s[ind+1]){
+            ans += dp[ind+2];
+            ans %= M;
+            if(ind + 2 < n && s[ind] == s[ind+2]){
+                ans += dp[ind + 3];
+                ans %= M;
+                if(ind + 3 < n && s[ind] == s[ind + 3] && (s[ind] == '7' || s[ind] == '9')){
+                    ans += dp[ind + 4];
+                    ans %= M;
+                }
+            }
+        }
+        ans += dp[ind + 1];
+         dp[ind] = ans%M;
+        }
+        return dp[0];
     }
 };
