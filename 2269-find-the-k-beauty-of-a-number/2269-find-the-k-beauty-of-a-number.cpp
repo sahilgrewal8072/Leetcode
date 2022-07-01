@@ -1,32 +1,18 @@
 class Solution {
 public:
     int divisorSubstrings(int num, int k) {
-        string s = to_string(num);
-        int n = s.length();
-        int left = 0;
-        int right = 0;
-        int count = 0;
-        string curr = "";
-        while(right < k){
-            curr += s[right++];
+        int pow = 1;
+        int curr = 0;
+        int res = 0;
+        for(int n = num; n > 0; n /= 10){
+            curr += (n%10)*pow;
+            if(--k > 0){
+                pow *= 10;
+            }else{
+                res += (curr && !(num%curr));
+                curr /= 10;
+            }
         }
-        
-        int x = stoi(curr);
-        if(num%x == 0){
-            count++;
-        }
-        // cout<<curr<<endl;
-        for(right; right < n; right++){
-            // cout<<left<<" "<<right<<endl;
-            curr += s[right];
-            
-            curr.erase(0, 1);
-            // cout<<curr<<endl;
-            left++;
-            x = stoi(curr);
-            if(x != 0 && num%x == 0)count++;
-        }
-        
-        return count;
+        return res;
     }
 };
