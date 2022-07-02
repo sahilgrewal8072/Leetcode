@@ -8,14 +8,7 @@ public:
         sort(horizontalCuts.begin(), horizontalCuts.end());
         sort(verticalCuts.begin(), verticalCuts.end());
          int mx_height = horizontalCuts[0];
-        if(n == 1){
-            mx_height = max(h - horizontalCuts[n-1], horizontalCuts[0]);
-        }
         int mx_width = verticalCuts[0];
-        if(m == 1){
-            mx_width = max(w - verticalCuts[m-1], verticalCuts[0]);
-        }
-        
         for(int i=1; i<n; i++){
             if(horizontalCuts[i] - horizontalCuts[i-1] > mx_height){
                 mx_height = horizontalCuts[i] - horizontalCuts[i-1];
