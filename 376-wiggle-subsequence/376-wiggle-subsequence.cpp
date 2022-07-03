@@ -18,7 +18,6 @@ public:
             if(nums[0] == nums[1])return 1;
             return 2;
         }
-        // vector<vector<int>> dp(n+1, vector<int>(2, 0));
        vector<int> nxt(2, 0), curr(2, 0);
         for(int ind = n-1; ind>0; ind--){
             for(int state = 0; state <= 1; state++){
