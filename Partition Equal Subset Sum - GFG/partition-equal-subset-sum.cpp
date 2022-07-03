@@ -29,7 +29,7 @@ public:
        int sum = 0;
        for(int i=0; i<n; i++)sum += arr[i];
        if(sum&1)return 0;
-       vector<vector<int>> dp(n, vector<int>(1e5 + 1, -1));
+       vector<vector<int>> dp(n, vector<int>(sum+1, -1));
        return solve(n-1, arr, sum/2, 0, dp);
     }
 };
