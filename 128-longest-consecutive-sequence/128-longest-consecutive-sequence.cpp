@@ -4,7 +4,7 @@ public:
         unordered_set<int> st;
         int n = nums.size();
         
-        for(auto it : nums){
+        for(auto &it : nums){
             st.insert(it);
         }
         
