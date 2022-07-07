@@ -11,8 +11,7 @@ class Solution {
         int take2 = 0;
         if(ind1 >= 0 && ind2 >= 0 && s1[ind1] == s3[ind3] && s2[ind2] == s3[ind3]){
             return dp[ind1][ind2] = (solve(ind1-1, ind2, ind3-1, s1, s2, s3, dp) || solve(ind1, ind2-1, ind3-1, s1, s2, s3, dp));
-        }
-        if(ind1 >= 0 && s1[ind1] == s3[ind3]){
+        }else if(ind1 >= 0 && s1[ind1] == s3[ind3]){
             take1 = solve(ind1-1, ind2, ind3-1, s1, s2, s3, dp);
         }else if(ind2 >= 0 && s2[ind2] == s3[ind3]){
             take2 = solve(ind1, ind2-1, ind3-1, s1, s2, s3, dp);
