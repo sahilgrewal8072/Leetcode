@@ -24,8 +24,28 @@ public:
         int n = s1.length();
         int l = s2.length();
         int m = s3.length();
-        vector<vector<int>> dp(n+1, vector<int>(l+1, -1));
+        vector<vector<int>> dp(n+1, vector<int>(l+1, 0));
         if(n + l != m)return false;
-        return solve(n-1, l-1, m-1, s1, s2, s3, dp);
+        // return solve(n-1, l-1, m-1, s1, s2, s3, dp);
+        for(int ind1 = 0; ind1 <=n; ind1++){
+            for(int ind2 = 0; ind2 <= l; ind2++){
+                if(ind1 == 0 && ind2 == 0){
+                    dp[ind1][ind2] = true;
+                }else if(ind1 > 0 && ind2 > 0 && s1[ind1 - 1] == s3[ind1 + ind2 - 1] && s2[ind2 - 1] == s3[ind1 + ind2 - 1]){
+                    dp[ind1][ind2] = (dp[ind1-1][ind2] || dp[ind1][ind2-1]);
+                }else if(ind2 == 0){
+                    if(s1[ind1-1] == s3[ind1-1])
+                    dp[ind1][ind2] = dp[ind1-1][ind2];
+                }else if(ind1 == 0){
+                    if(s2[ind2-1] == s3[ind2 - 1])
+                    dp[ind1][ind2] = dp[ind1][ind2-1];
+                }else if(s1[ind1 - 1] != s3[ind1 + ind2 - 1] && s2[ind2 - 1] == s3[ind1 + ind2 - 1]){
+                    dp[ind1][ind2] = dp[ind1][ind2-1];
+                }else if(s1[ind1 - 1] == s3[ind1 + ind2 - 1] && s2[ind2 - 1] != s3[ind1 + ind2 - 1]){
+                     dp[ind1][ind2] = dp[ind1-1][ind2];
+                }
+            }
+        }
+        return dp[n][l];
     }
 };
