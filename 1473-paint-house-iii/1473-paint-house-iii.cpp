@@ -19,16 +19,14 @@ class Solution {
             return dp[ind][prev][target] = solve(ind + 1, houses[ind], target, houses, cost, m, n, dp);
             else
                 return dp[ind][prev][target] = solve(ind + 1, houses[ind], target-1, houses, cost, m, n, dp);
-        }else{
+        }
             for(int i=1; i<=n; i++){
             if(houses[ind] == 0){
                 int x = target;
                 if(prev != i)x--;
                  mn = min(mn, cost[ind][i-1] + solve(ind + 1, i, x, houses, cost, m, n, dp));
                 }
-            }
-        }    
-        
+            }    
         return dp[ind][prev][target] = mn;
     }
     
