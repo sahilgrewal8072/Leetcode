@@ -1,24 +1,14 @@
 class Solution {
 public:
-    bool canJump(vector<int>& arr) {
-        int n = arr.size();
-        if(n <= 1){
-            return true;
-        }
-        if(arr[0] == 0)return false;
-        int reach = 0;
-        for(int i=0; i<n; i++){
-            if(i + arr[i] > reach){
-                reach = i + arr[i];
-            }
-            if(i == reach){
-                return false;
-            }
-            
-            if(reach >= n-1){
-                return true;
+    bool canJump(vector<int>& nums) {
+        int n = nums.size();
+        int jump_req = 0;
+        for(int i=n-2; i>= 0; i--){
+            jump_req++;
+            if(nums[i] >= jump_req){
+                jump_req = 0;
             }
         }
-        return false;
+        return (jump_req == 0);
     }
 };
