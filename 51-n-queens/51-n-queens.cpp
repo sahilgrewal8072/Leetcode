@@ -19,11 +19,12 @@ class Solution {
         }
     
     private:
-    void solve(int ind, string curr, vector<string> &stocks, vector<vector<int>> &board, int n, vector<vector<string>> &ans){
+    void solve(int ind, string &curr, vector<string> &stocks, vector<vector<int>> &board, int n, vector<vector<string>> &ans){
         if(ind == n){
             ans.push_back(stocks);
             return;
         }
+        
         string x = curr;
         for(int j=0; j<n; j++){
             if(isPossible(board, ind, j, n)){
