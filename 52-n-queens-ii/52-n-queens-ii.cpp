@@ -25,8 +25,7 @@ class Solution {
             count++;
             return;
         }
-        
-    
+          
         for(int j=0; j<n; j++){
             if(isPossible(board, ind, j, n)){
                 board[ind][j] = 1;
