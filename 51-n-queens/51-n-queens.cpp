@@ -1,6 +1,6 @@
 class Solution {
     private:
-        bool isPossible(vector<vector<int>> &board, int x, int y, int n){
+        bool isPossible(vector<vector<int>> &board, int &x, int &y, int &n){
             int i=x, j=y;
             for(; i>=0 && j>=0; i--, j--){
                 if(board[i][j] == 1)return false;
@@ -10,6 +10,7 @@ class Solution {
             for(; i>=0 && j < n; i--, j++){
                 if(board[i][j] == 1)return false;
             }
+            
             j = y;
             i = x;
             for(; i>=0; i--){
@@ -19,7 +20,7 @@ class Solution {
         }
     
     private:
-    void solve(int ind, string &curr, vector<string> &stocks, vector<vector<int>> &board, int n, vector<vector<string>> &ans){
+    void solve(int ind, string &curr, vector<string> &stocks, vector<vector<int>> &board, int &n, vector<vector<string>> &ans){
         if(ind == n){
             ans.push_back(stocks);
             return;
