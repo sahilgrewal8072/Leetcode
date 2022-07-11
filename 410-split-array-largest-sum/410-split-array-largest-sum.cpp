@@ -1,6 +1,6 @@
 class Solution {
     private:
-    bool isPossible(int &sum, int m, vector<int> &nums, int &n){
+    bool isPossible(int &sum, int &m, vector<int> &nums, int &n){
         int curr_sum = 0;
         int sub = 1;
         for(int i=0; i<n; i++){
