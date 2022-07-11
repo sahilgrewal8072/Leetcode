@@ -25,7 +25,7 @@ public:
     int minDays(vector<int>& bloomDay, int m, int k) {
         int n = bloomDay.size();
         if(k == 0 || m == 0 || n == 0)return 0;
-        if(m*k > n)return -1;
+        if(k > n)return -1;
         // sort(bloomDay.begin(), bloomDay.end());
         int mn = INT_MAX;
         int mx = INT_MIN;
