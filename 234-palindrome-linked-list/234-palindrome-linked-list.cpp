@@ -10,6 +10,7 @@
  */
 class Solution {
 public:
+    // One pass with const space
     bool isPalindrome(ListNode* head) {
         ListNode* slow = head, *fast = head, *prev = nullptr, *temp = nullptr;
         while(fast && fast->next){
