@@ -10,6 +10,7 @@
  * };
  */
 class Solution {
+    //iterative method
     private:
         void solve(TreeNode* root){
             stack<TreeNode*> st;
@@ -26,9 +27,21 @@ class Solution {
                 root = root->left;
             }
         }
+    
+    // recursive method;
+    void solve_recur(TreeNode* root, int &sum){
+        if(!root)return;
+        solve_recur(root->right, sum);
+        sum += root->val;
+        root->val = sum;
+        solve_recur(root->left, sum);
+    }
+    
 public:
     TreeNode* bstToGst(TreeNode* root) {
-        solve(root);
+        // solve(root);
+        int sum = 0;
+         solve_recur(root, sum);
         return root;
     }
 };
