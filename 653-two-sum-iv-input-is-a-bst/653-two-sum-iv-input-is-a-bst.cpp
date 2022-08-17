@@ -11,6 +11,7 @@
  */
 class Solution {
     public:
+    // Tc is O(N) and space is O(logn)
     stack<TreeNode*> st1, st2;
     
     void fill_asc(TreeNode* root) {
