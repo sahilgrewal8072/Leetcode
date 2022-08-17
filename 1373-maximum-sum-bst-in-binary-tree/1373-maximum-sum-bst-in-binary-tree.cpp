@@ -1,50 +1,60 @@
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
+
+class BST{
+    public:
+    bool isBst;
+    int t_min;
+    int t_max;
+    int sum;
+    // BST(bool _isBst, int _t_min, int _t_max){
+    //     isBst = _isBst;
+    //     t_min = _t_min;
+    //     t_max = _t_max;
+    // }
+};
+
 class Solution {
 public:
-    class bst {
-    public:
-      bool isbst;
-      int max;
-      int min;
-      int sum;
-    };
-
-    bst Bst(TreeNode* root) {
-
-      if (root == nullptr)
-      {  
-        bst bres;            // Base Case
-        bres.isbst = true;
-        bres.max = INT_MIN;
-        bres.min = INT_MAX;
-        bres.sum = 0;
-        return bres;
-      }
-      bst l = Bst(root->left); // left sub-tree
-      bst r = Bst(root->right); // right sub-tree
-
-      bst ans;
-
-      ans.max = max(root->val, r.max);
-      ans.min = min(root->val, l.min);
-
-      // Check if current tree is Bst or not ?
-      ans.isbst = l.isbst && r.isbst && (l.max < root->val && r.min > root->val);
-
-      if(ans.isbst){
-          ans.sum = l.sum + r.sum + root->val;
-          // ans.min = min(root->val, l.min);
-          // ans.max = max(root->val, r.max);
-      }
-      else
-          ans.sum = max(l.sum, r.sum);
-      
-      res = max(res, ans.sum);
-      return ans;
+    BST solve(TreeNode* root) {
+        if(!root){
+            BST temp;
+            temp.sum = 0;
+            temp.isBst = true;
+            temp.t_min = INT_MAX;
+            temp.t_max = INT_MIN;
+            return temp;
+        }
+       
+        BST lt = solve(root->left);
+        BST rt = solve(root->right);
+        BST curr;
+        curr.t_min = min(root->val, lt.t_min);
+        curr.t_max = max(root->val, rt.t_max);
+        curr.isBst = lt.isBst && rt.isBst && (root->val > lt.t_max && root->val < rt.t_min);
+        
+        if(curr.isBst){
+            curr.sum = root->val + lt.sum + rt.sum;
+        }else{
+            curr.sum = max(lt.sum, rt.sum);
+        }
+        res = max(res, curr.sum);
+        return curr;
     }
+    
     
     int res = INT_MIN;
     int maxSumBST(TreeNode* root) {
-        Bst(root);
+        solve(root);
         return res > 0 ? res : 0;
     }
 };
