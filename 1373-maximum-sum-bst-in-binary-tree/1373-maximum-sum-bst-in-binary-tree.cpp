@@ -32,8 +32,8 @@ public:
 
       if(ans.isbst){
           ans.sum = l.sum + r.sum + root->val;
-          ans.min = min(root->val, l.min);
-          ans.max = max(root->val, r.max);
+          // ans.min = min(root->val, l.min);
+          // ans.max = max(root->val, r.max);
       }
       else
           ans.sum = max(l.sum, r.sum);
