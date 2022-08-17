@@ -24,8 +24,8 @@ public:
 
       bst ans;
 
-      ans.max = max(root->val, max(l.max, r.max));
-      ans.min = min(root->val, min(l.min, r.min));
+      ans.max = max(root->val, r.max);
+      ans.min = min(root->val, l.min);
 
       // Check if current tree is Bst or not ?
       ans.isbst = l.isbst && r.isbst && (l.max < root->val && r.min > root->val);
