@@ -18,9 +18,6 @@ class Solution {
         int right = solve(root->right,  mp, mx_freq);
         int sum = root->val + left + right;
         mp[sum]++;
-        // if(mp[sum] > mx_sum){
-        //     mx_sum = mp[sum];
-        // }
         mx_freq = max(mx_freq, mp[sum]);
         return sum;
     }
