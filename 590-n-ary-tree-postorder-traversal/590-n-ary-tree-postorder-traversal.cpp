@@ -30,8 +30,22 @@ class Solution {
     }
 public:
     vector<int> postorder(Node* root) {
+        if(!root)return {};
         vector<int> ans;
-        solve(root, ans);
+        stack<Node*> st;
+        st.push(root);
+        while(!st.empty()){
+            auto node = st.top();
+            st.pop();
+            ans.push_back(node->val);
+            for(auto it : node->children){
+                if(it != nullptr){
+                    st.push(it);
+                }
+            }
+        }
+        reverse(ans.begin(), ans.end());
         return ans;
     }
+    
 };
