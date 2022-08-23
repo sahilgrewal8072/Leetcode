@@ -31,7 +31,20 @@ class Solution {
 public:
     vector<int> preorder(Node* root) {
         vector<int> ans;
-        solve(root, ans);
+        // solve(root, ans);
+        // return ans;
+        if(!root)return {};
+        stack<Node*> st;
+        st.push(root);
+        while(!st.empty()){
+            auto node = st.top();
+            st.pop();
+            ans.push_back(node->val);
+            for(int i = node->children.size() - 1; i>=0; i--){
+                if(node->children[i] != nullptr)
+                st.push(node->children[i]);
+            }
+        }
         return ans;
     }
 };
