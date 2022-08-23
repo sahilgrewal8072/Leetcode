@@ -10,30 +10,23 @@
  * };
  */
 class Solution {
+    private:
+    TreeNode* build_Tree(vector<int> &preorder, vector<int> &inorder, int in_s, int in_e, int p_s, int p_e, unordered_map<int, int> &mp){
+        if(in_s > in_e || p_s > p_e)return nullptr;
+        int myroot = mp[preorder[p_s]];
+        TreeNode* root = new TreeNode(preorder[p_s]);
+        int diff = myroot - in_s;
+        root->left = build_Tree(preorder, inorder, in_s, myroot-1, p_s + 1, p_s + diff, mp);
+        root->right = build_Tree(preorder, inorder, myroot + 1, in_e, p_s + diff + 1, p_e, mp);
+        return root;
+    }
 public:
-    unordered_map<int, int> mp;
-    
-     TreeNode* builder(vector<int> &preorder, vector<int> &inorder, int inStart, int inEnd, int preStart, int preEnd){
-         if(inStart > inEnd || preStart > preEnd)return nullptr;
-         
-         int myroot = mp[preorder[preStart]];
-         TreeNode* root = new TreeNode(preorder[preStart]);
-         int diff = myroot - inStart;
-         root->left = builder(preorder, inorder, inStart, myroot-1, preStart+1, preStart + diff);
-         root->right = builder(preorder, inorder, myroot+1, inEnd, preStart + diff + 1, preEnd);
-         return root;
-     }
-    
     TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder) {
         int n = inorder.size();
-        int m = preorder.size();
+        unordered_map<int, int> mp;
         for(int i=0; i<n; i++){
             mp[inorder[i]] = i;
         }
-        int inStart = 0;
-        int preStart = 0;
-        int inEnd = n-1;
-        int preEnd = m-1;
-        return builder(preorder, inorder, inStart, inEnd, preStart, preEnd);
+        return build_Tree(preorder, inorder, 0, n-1, 0, n-1, mp);
     }
 };
