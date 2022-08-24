@@ -11,6 +11,7 @@
  */
 class Solution {
     private:
+    // storing nodes in sorted instead of their value so that we can save space by manuplating them directly
     void inorderTraversal(TreeNode* root, vector<TreeNode*> &sorted){
         if(!root){
             return;
