@@ -20,26 +20,25 @@
  * };
  */
 class Solution {
-public:
-    
-    
-    TreeNode* BST(ListNode* head, ListNode* tail){
-        if(head == tail)return nullptr;
+    private:
+    TreeNode* solve(ListNode* head, ListNode* end){
+        if(head == end)return nullptr;
+        
+        // finding the mid of the list;
         ListNode* slow = head;
         ListNode* fast = head;
-        while(fast != tail && fast->next != tail){
+        while(fast != end && fast->next != end){
             fast = fast->next->next;
             slow = slow->next;
         }
         
         TreeNode* root = new TreeNode(slow->val);
-        root->left = BST(head, slow);
-        root->right = BST(slow->next, tail);
+        root->left = solve(head, slow);
+        root->right = solve(slow->next, end);
         return root;
     }
-    
+public:
     TreeNode* sortedListToBST(ListNode* head) {
-        if(!head)return nullptr;
-        return BST(head, nullptr);
+        return solve(head, nullptr);
     }
 };
