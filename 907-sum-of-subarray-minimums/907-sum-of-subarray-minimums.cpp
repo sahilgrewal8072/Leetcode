@@ -1,5 +1,6 @@
 class Solution {
 public:
+    // Maha important sum
     int mod = 1e9 + 7;
     int sumSubarrayMins(vector<int>& arr) {
         // ple = previous less element 
