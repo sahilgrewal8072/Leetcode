@@ -1,5 +1,6 @@
 class MyQueue {
 public:
+    // amortized O(1) Solution.
     stack<int> input;
     stack<int> output;
     MyQueue() {
