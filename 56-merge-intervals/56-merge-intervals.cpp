@@ -2,19 +2,19 @@ class Solution {
 public:
     vector<vector<int>> merge(vector<vector<int>>& inter) {
         int n = inter.size();
-        if(n == 1)return inter;
-        vector<vector<int>> ans;
         sort(inter.begin(), inter.end());
-        ans.push_back(inter[0]);
-        int j=0;
+       vector<vector<int>> st;
+        st.push_back({inter[0][0], inter[0][1]});
+        int j= 0;
         for(int i=1; i<n; i++){
-            if(ans[j][1] >= inter[i][0]){
-                ans[j][1] = max(ans[j][1], inter[i][1]);
+            if(st[j][1] >= inter[i][0]){
+                st[j][1] = max(inter[i][1], st[j][1]);
             }else{
-                ans.push_back(inter[i]);
+                st.push_back(inter[i]);
                 j++;
             }
         }
-        return ans;
+      
+        return st;
     }
 };
