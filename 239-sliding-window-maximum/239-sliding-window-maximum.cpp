@@ -1,6 +1,6 @@
 class Solution {
 public:
-    vector<int> maxSlidingWindow(vector<int>& nums, int k) {
+    vector<int> maxSlidingWindow(vector<int>& nums, int &k) {
         int n = nums.size();
         int left = 0;
         deque<int> q;
@@ -14,6 +14,8 @@ public:
             
             if((i - left) + 1 == k){
                 ans.push_back(q.front());
+            }else{
+                continue;
             }
             
             if((i - left) + 1 == k){
