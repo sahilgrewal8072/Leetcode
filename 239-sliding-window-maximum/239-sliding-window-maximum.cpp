@@ -14,8 +14,6 @@ public:
             
             if((i - left) + 1 == k){
                 ans.push_back(q.front());
-            }else{
-                continue;
             }
             
             if((i - left) + 1 == k){
