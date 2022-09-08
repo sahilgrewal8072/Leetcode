@@ -1,5 +1,7 @@
 class MedianFinder {
 public:
+    //Must revise
+    // addNuM => O(logN) for 1 operation
     priority_queue<int> mx;
     priority_queue<int, vector<int>, greater<int>> mn;
     MedianFinder() {
