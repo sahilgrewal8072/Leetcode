@@ -1,4 +1,5 @@
 class Solution {
+    // Dp + limited DFS
     private:
     unordered_set<string> visited;
     int bracketsToRemove(string &s, int &n){
