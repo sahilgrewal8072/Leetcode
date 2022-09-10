@@ -24,7 +24,18 @@ public:
         
         int newTarget = abs(sum + target);
         if(newTarget/2 > sum || newTarget&1)return 0;
-        vector<vector<int>> dp(n + 1, vector<int> (newTarget/2  + 1, -1));
-        return solve(n, nums, newTarget/2, dp);
+        vector<vector<int>> dp(n + 1, vector<int> (newTarget/2  + 1, 0));
+        // return solve(n, nums, newTarget/2, dp);
+        dp[0][0] = 1;
+        for(int ind=1; ind<=n; ind++){
+            for(int sum = 0; sum <= newTarget/2; sum++){
+                 if(sum >= nums[ind-1]){
+                     dp[ind][sum] = dp[ind-1][sum - nums[ind-1]] + dp[ind-1][sum];
+                }else{
+                    dp[ind][sum] = dp[ind-1][sum];  
+                }
+            }
+        }
+        return dp[n][newTarget/2];
     }
 };
