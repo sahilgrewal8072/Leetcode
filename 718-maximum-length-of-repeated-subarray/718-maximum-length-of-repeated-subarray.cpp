@@ -17,8 +17,19 @@ public:
     int findLength(vector<int>& nums1, vector<int>& nums2) {
         int m = nums1.size();
         int n = nums2.size();
-        vector<vector<int>> dp(m+1, vector<int>(n+1, -1));
-        solve(m, n, nums1, nums2, dp);
-        return overall;
+        vector<vector<int>> dp(m+1, vector<int>(n+1, 0));
+        // solve(m, n, nums1, nums2, dp);
+        // return overall;
+        int ans = 0;
+        for(int ind1 = 1; ind1 <= m; ind1++){
+            for(int ind2 = 1; ind2 <= n; ind2++){
+                if(nums1[ind1-1] == nums2[ind2-1]){
+                    dp[ind1][ind2] = max(1 + dp[ind1-1][ind2-1], 0);
+                }
+                ans = max(ans, dp[ind1][ind2]);
+            }
+            
+        }
+        return ans;
     }
 };
