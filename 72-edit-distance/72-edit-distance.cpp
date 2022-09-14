@@ -1,6 +1,6 @@
 class Solution {
     private:
-    int solve(int ind1, int ind2, string word1, string word2, vector<vector<int>> &dp){
+    int solve(int ind1, int ind2, string &word1, string &word2, vector<vector<int>> &dp){
         if(ind1 == 0){
             return ind2;
         }
