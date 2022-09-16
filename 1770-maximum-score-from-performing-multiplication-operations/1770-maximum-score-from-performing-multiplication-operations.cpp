@@ -22,28 +22,16 @@ public:
     int maximumScore(vector<int>& nums, vector<int>& multipliers) {
         int n = nums.size();
         int m = multipliers.size();
-        vector<vector<int>> dp(m , vector<int> (m, -1001));
+        vector<vector<int>> dp(m+1 , vector<int> (m + 1, 0));
         int mx = 0;
-        return solve(0, n-1, 0, nums, multipliers, n, m, dp);
-        // for(int start = 0, end = n-1; start <= end; start++, end--){
-        //         for(int multi = 0; multi <= m-1; multi++){
-        //             if(start > end)continue;
-        //             if(start == end){
-        //                 dp[start][end] = multipliers[multi]*nums[start];
-        //             }else{
-        //                 int front = multipliers[multi]*nums[start] + dp[start + 1][end];
-        //                 int back = multipliers[multi]*nums[end] + dp[start][end-1];
-        //                 dp[start][end] = max(front, back);
-        //             }
-        //         } 
-        //         mx = max(mx, dp[start][end]);
-        //     }
-        // for(auto it : dp){
-        //     for(auto pt : it){
-        //         cout<<pt<<" ";
-        //     }
-        //     cout<<endl;
-        // }
-        // return dp[0][0];
+        // return solve(0, n-1, 0, nums, multipliers, n, m, dp);
+        for(int multi = m-1; multi >= 0; multi--){
+            for(int start = multi; start >= 0; start--){
+                int front = multipliers[multi]*nums[start] + dp[start + 1][multi + 1];
+                int back = multipliers[multi]*nums[n - 1 - (multi - start)]  + dp[start][multi + 1];
+                dp[start][multi] = max(front, back);
+            }
+        }
+        return dp[0][0];
     }
 };
