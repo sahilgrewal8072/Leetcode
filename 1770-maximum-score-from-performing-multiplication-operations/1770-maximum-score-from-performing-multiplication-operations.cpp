@@ -22,9 +22,7 @@ public:
     int maximumScore(vector<int>& nums, vector<int>& multipliers) {
         int n = nums.size();
         int m = multipliers.size();
-        vector<vector<int>> dp(m+1 , vector<int> (m + 1, 0));
-        int mx = 0;
-        // return solve(0, n-1, 0, nums, multipliers, n, m, dp);
+        vector<vector<int>> dp(m + 1 , vector<int> (m+1, 0));
         for(int multi = m-1; multi >= 0; multi--){
             for(int start = multi; start >= 0; start--){
                 int front = multipliers[multi]*nums[start] + dp[start + 1][multi + 1];
