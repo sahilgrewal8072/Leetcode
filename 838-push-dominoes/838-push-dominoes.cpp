@@ -16,8 +16,8 @@ class Solution {
 public:
     string pushDominoes(string s) {
         int n = s.length();
-        vector<int> left(n, 0);
-        vector<int> right(n, 0);
+        vector<int> left(n, -1);
+        vector<int> right(n, -1);
         
         int count = 0;
         char prev = '1';
@@ -33,18 +33,18 @@ public:
         
         
         for(int i=0; i<n; i++){
-            if(right[i] == 0 && left[i] == 0){
+            if(right[i] == -1 && left[i] == -1){
                 continue;
-            }else if(!left[i]){
-                s[i] = 'R';
-            }else if(!right[i]){
-                s[i] = 'L';
             }else if(left[i] == right[i]){
-                s[i] = '.';   
-            }else if(right[i] < left[i]){
-                s[i] = 'R';
-            }else{
+                s[i] = '.';
+            }else if(right[i] == -1 && left[i] > 0){
                 s[i] = 'L';
+            }else if(left[i] == -1 && right[i] > 0){
+                s[i] = 'R';
+            }else if(left[i] < right[i]){
+                s[i] = 'L';
+            }else{
+                s[i] ='R';
             }
             
         }
