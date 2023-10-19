@@ -6,9 +6,6 @@ public:
         sort(intervals.begin(), intervals.end());
         ans.push_back(intervals[0]);
         vector<int> last = intervals[0];
-        // for(auto it : intervals){
-        //     cout<<it[0]<<" ";
-        // }
         for(int i = 1; i<n; i++){
             int curr_first = intervals[i][0];
             int last_last = last[1];
