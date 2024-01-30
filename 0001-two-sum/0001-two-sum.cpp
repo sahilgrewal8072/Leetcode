@@ -1,5 +1,6 @@
 class Solution {
 public:
+// Dummy comment
     vector<int> twoSum(vector<int>& nums, int target) {
        int n = nums.size();
        unordered_map<int, int> mp;
