@@ -32,7 +32,6 @@ public class Solution {
             }
             return slow;
         }
-        ListNode ans = new ListNode(-1);
         return null;
     }
 }
