@@ -14,9 +14,9 @@ public:
                 count[s[j] - 'a']++;
             }
             string key = "";
-            for(int k = 0; k < 26; k++){
+            for(int i= 0; i < 26; i++){
                 key += "#";
-                key += to_string(count[k]);
+                key += to_string(count[i]);
             }
 
             if(mp.find(key) == mp.end())mp[key] = vector<string>();
@@ -24,8 +24,9 @@ public:
         }
 
         vector<vector<string>> result;
-        for (auto itr = mp.begin(); itr != mp.end(); ++itr)
-            result.push_back(itr->second);
+        for(auto it : mp){
+            result.push_back(it.second);
+        }
         return result;
     }
 };
