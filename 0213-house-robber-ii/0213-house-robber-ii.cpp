@@ -16,17 +16,22 @@ class Solution {
     }
 
     int solve_itr(int start, int end, vector<int> &nums){
-        vector<int> dp(end  + 3, 0);
+        // vector<int> dp(end  + 3, 0);
+        int nxt = 0;
+        int nxt_nxt = 0;
         dp[end] = 0;
+        int curr = 0;
         for(int ind = end; ind>=start; ind--){
              int take = INT_MIN;
             int notake = INT_MIN;
 
-            take  = nums[ind] + dp[ind + 2];
-            notake = 0 + dp[ind + 1];
-            dp[ind] = max(take, notake);
+            take  = nums[ind] + nxt_nxt;
+            notake = 0 + nxt;
+            curr = max(take, notake);
+            nxt_nxt = nxt;
+            nxt = curr;
         }   
-        return dp[start];
+        return nxt;
     }
 public:
     int rob(vector<int>& nums) {
