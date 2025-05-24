@@ -19,7 +19,7 @@ class Solution {
         // vector<int> dp(end  + 3, 0);
         int nxt = 0;
         int nxt_nxt = 0;
-        dp[end] = 0;
+        // dp[end] = 0;
         int curr = 0;
         for(int ind = end; ind>=start; ind--){
              int take = INT_MIN;
