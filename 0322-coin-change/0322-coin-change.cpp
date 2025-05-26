@@ -23,16 +23,17 @@ class Solution {
 public:
     int coinChange(vector<int>& coins, int final_amount) {
         int n = coins.size();
-        vector<vector<int>> dp(n, vector<int>(final_amount + 1, 0));
+        // vector<vector<int>> dp(n, vector<int>(final_amount + 1, 0));
         // int ans =  solve(n-1, amount, coins, dp);
+        vector<int> prev(final_amount + 1, 0), curr(final_amount + 1, 0);
         
         for(int ind = 0; ind < n; ind++){
             for(int amount = 1; amount <= final_amount; amount++){
                 if(ind == 0){ 
-                    dp[ind][amount] = 1e8;
+                    curr[amount] = 1e8;
                 if(amount >= coins[ind]){
                     if(amount%coins[ind] == 0){
-                        dp[ind][amount] = amount/coins[ind];
+                        curr[amount] = amount/coins[ind];
                     }
                 } 
                 continue;
@@ -42,14 +43,15 @@ public:
                 int notake = 1e8;
 
                 if(coins[ind] <= amount){
-                    take = 1 + dp[ind][amount - coins[ind]];
+                    take = 1 + curr[amount - coins[ind]];
                 }
-                notake = 0 + dp[ind - 1][amount];
-                 dp[ind][amount] = min(take, notake);
+                notake = 0 + prev[amount];
+                 curr[amount] = min(take, notake);
             }
+            prev = curr;
         }
-        if(dp[n-1][final_amount] >= 1e8)return -1;
-        cout<<dp[n-1][final_amount]<<endl;
-        return dp[n-1][final_amount];
+        if(prev[final_amount] >= 1e8)return -1;
+        // cout<<dp[final_amount]<<endl;
+        return prev[final_amount];
     }
 };
